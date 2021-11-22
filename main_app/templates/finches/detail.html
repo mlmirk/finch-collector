@@ -3,10 +3,19 @@
 
 {% block head %}
 <link 
+  href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" 
+  rel="stylesheet" 
+/>
+<script 
+  src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"
+>
+</script>
+<link 
   rel="stylesheet" 
   type="text/css" 
   href="{% static 'css/finch-detail.css' %}"
 />
+<script defer src="{% static 'js/finch-detail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -32,5 +41,53 @@
     </div>
   </div>
 </section>
+<div class="feedings-toy-container">
+  <section class="feedings">
+    <div class="subsection-title">
+      <h2>Sightings</h2>
+      <img 
+        src="{% static 'images/cat-cone.svg' %}" 
+        alt="An ice cream cone cat"
+      />
+      <img 
+        src="{% static 'images/cat-onigiri.svg' %}"
+        alt="A cat as onigiri"
+      />
+      <img 
+        src="{% static 'images/kitty-kabob.svg' %}" 
+        alt="A kabob of kittens"
+      />
+    </div>
+      <h3>Add a Sighting</h3>
+    <form
+    action="{%url 'add_sighting' finch.id%}"
+      method="post" 
+      class="subsection-content"
+    >
+      {% csrf_token %}
+      {{ sighting_form.as_p }}
+      <button type="submit" class="btn submit">Add Sighting</button>
+    </form>
+    <h3>Past Sightings</h3>
+    {% if finch.sighting_set.all.count %}
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Spotted</th></tr>
+        </thead>
+        <tbody>
+          {% for sighting in finch.sighting_set.all %}
+            <tr>
+              <td>{{sighting.date}}</td>
+              <td>{{sighting.get_spotted_display}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="subsection-content">{{finch.name}} has never been seen 😟</p>
+    {% endif %}
+  </section>
+</div>
+
 
 {% endblock %}
