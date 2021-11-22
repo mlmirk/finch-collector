@@ -26,6 +26,10 @@
       <h2>A {{ finch.species }} kitten.</h2>
     {% endif %}
     <p>{{ finch.description }}</p>
+    <div class="finch-actions">
+    <a href="{%url 'finches_update' finch.id%}" class="btn warn">UPDATE</a>
+    <a href="{%url 'finches_delete' finch.id%}" class="btn danger">DELETE</a>
+    </div>
   </div>
 </section>
 

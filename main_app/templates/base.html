@@ -18,7 +18,7 @@
 <body>
   <header>
     <div class="header-logo-container">
-      <a href="/">
+      <a href="{%url 'home'%}">
         <img 
           src="{% static 'images/header-logo.svg'%}" 
           alt="The Finch Collector Logo"
@@ -27,8 +27,9 @@
     </div>
     <nav>
       <ul>
-      <li><a href="/finches">All Finches</a></li>
-      <li><a href="/about">About</a></li>
+      <li><a href="{%url 'finches_index'%}">All Finches</a></li>
+      <a href="{%url 'finches_create' %}">Add a finch</a>
+      <li><a href="{%url 'about'%}">About</a></li>
       </ul>
     </nav>
   </header>
