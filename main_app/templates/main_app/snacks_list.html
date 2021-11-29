@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/snacks-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+
+
+<section class="card-container">
+  {% for snack in snacks_list %}
+  <div class="card" style="border-color: {{ snack.color }}">
+    <div class="card-bg" style="background-color: {{ snack.color }}"></div>
+    <a href="{% url 'snacks_detail' snack.id %}">
+      <div class="card-content">
+        <h2>{{ snack.name }}</h2>
+        <p>A {{ snack.color }} snack</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
